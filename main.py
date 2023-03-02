@@ -30,4 +30,5 @@ def crawl_wikipedia(url):
         print(f'Página secundária: {title}')
 
 # Chama a função crawl_wikipedia com a URL da página inicial
-crawl_wikipedia('https://pt.wikipedia.org/wiki/Am%C3%A9rica_Futebol_Clube_(Belo_Horizonte)')
+url = 'https://pt.wikipedia.org/wiki/Am%C3%A9rica_Futebol_Clube_(Belo_Horizonte)'
+crawl_wikipedia(url)
