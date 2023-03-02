@@ -2,25 +2,25 @@ import requests
 from bs4 import BeautifulSoup
 
 def crawl_wikipedia(url):
-    # Faz a requisição HTTP e obtém o conteúdo HTML da página
+    # Make the HTTP request and get the HTML content of the page
     response = requests.get(url)
     html = response.content
 
-    # Analisa o conteúdo HTML da página com BeautifulSoup
+    # Parses the HTML content of the page with BeautifulSoup
     soup = BeautifulSoup(html, 'html.parser')
 
     # Extrai o nome da página visitada
     title = soup.find('title').text
     print(f'Página principal: {title}')
 
-    # Extrai todos os links da página que apontam para outras páginas da Wikipédia
+    # Extracts all links on the page that point to other Wikipedia pages
     wikipedia_links = []
     for link in soup.find_all('a'):
         href = link.get('href')
         if href and href.startswith('/wiki/') and ':' not in href:
             wikipedia_links.append(href)
 
-    # Realiza uma nova raspagem em cada link capturado
+    # Performs a new scrape on each captured link
     for link in wikipedia_links:
         new_url = f'https://pt.wikipedia.org{link}'
         response = requests.get(new_url)
@@ -29,6 +29,6 @@ def crawl_wikipedia(url):
         title = soup.find('title').text
         print(f'Página secundária: {title}')
 
-# Chama a função crawl_wikipedia com a URL da página inicial
+# Calls the crawl_wikipedia function with the URL of the homepage
 url = 'https://pt.wikipedia.org/wiki/Am%C3%A9rica_Futebol_Clube_(Belo_Horizonte)'
 crawl_wikipedia(url)
