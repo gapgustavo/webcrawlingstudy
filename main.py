@@ -9,7 +9,7 @@ def crawl_wikipedia(url):
     # Parses the HTML content of the page with BeautifulSoup
     soup = BeautifulSoup(html, 'html.parser')
 
-    # Extrai o nome da página visitada
+    # Extracts the name of the visited page
     title = soup.find('title').text
     print(f'Página principal: {title}')
 
